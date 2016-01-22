@@ -1,9 +1,12 @@
 var port = 1234;
-var http = require('http');
+var http = require('http'),
+    url  = require('url');
 
 http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello from the Node.js server!");
-  response.end();
+  request.on('end', function() {
+    var _get = url.parse(request.url, true).query;
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.end('Here is your data: ' + _get['data']);
+  });
 }).listen(port);
 console.log('Server is listening on port ' + port);
