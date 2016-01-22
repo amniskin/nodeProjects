@@ -1,5 +1,5 @@
-var port = 1234;
-var http = require('http'),
+var port = 1234,
+    http = require('http'),
     url  = require('url');
 
 http.createServer(function(request, response) {
